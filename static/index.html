@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Track internship applications, interviews and deadlines in one calm workspace.">
+<title>Internship Compass</title><link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="/"><span class="brand-icon">↗</span><span>internship<span class="brand-soft">compass</span></span></a>
+  <div class="side-label">WORKSPACE</div>
+  <button class="nav-item selected" id="allNav"><span>▦</span> All applications <span class="nav-count" id="navCount">0</span></button>
+  <div class="side-label side-label-gap">YOUR PIPELINE</div>
+  <div id="statusNav" class="status-nav"></div>
+  <div class="sidebar-bottom"><div class="tip-icon">✦</div><strong>Small steps add up.</strong><p>Keep your search organised and focus on the next action.</p></div>
+</aside>
+<main class="main">
+  <header class="topbar"><div><p class="eyebrow" id="todayLabel">YOUR CAREER WORKSPACE</p><h1>Good things take a plan.</h1><p class="subtitle">Keep your opportunities moving, one step at a time.</p></div><button class="button-primary" id="addButton">＋ Add application</button></header>
+  <section class="metrics">
+    <article class="metric"><div class="metric-top"><span>Total applications</span><span class="metric-icon green">▦</span></div><strong id="totalMetric">0</strong><small>Opportunities you're tracking</small></article>
+    <article class="metric"><div class="metric-top"><span>In progress</span><span class="metric-icon blue">↗</span></div><strong id="activeMetric">0</strong><small>Saved through interview stages</small></article>
+    <article class="metric"><div class="metric-top"><span>Interviews</span><span class="metric-icon purple">◉</span></div><strong id="interviewMetric">0</strong><small>Conversations to prepare for</small></article>
+    <article class="metric"><div class="metric-top"><span>Offers</span><span class="metric-icon orange">✦</span></div><strong id="offerMetric">0</strong><small>Reasons to celebrate</small></article>
+  </section>
+  <section class="deadline-strip"><div class="deadline-symbol">◷</div><div class="deadline-copy"><strong>Deadlines on your radar</strong><span id="deadlineText">Add deadlines to see what needs attention this week.</span></div><span class="deadline-number" id="deadlineMetric">0</span></section>
+  <section class="list-section">
+    <div class="list-heading"><div><p class="eyebrow">YOUR OPPORTUNITIES</p><h2>Application tracker</h2></div><a class="export-link" href="/api/export.csv">↓ Export CSV</a></div>
+    <div class="toolbar"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search company, role or notes…"></label><select id="filterStatus" aria-label="Filter by status"><option value="">All statuses</option><option>Saved</option><option>Applied</option><option>Assessment</option><option>Interview</option><option>Offer</option><option>Rejected</option></select><select id="sortSelect" aria-label="Sort applications"><option value="deadline">Deadline first</option><option value="updated">Recently updated</option><option value="company">Company A–Z</option></select></div>
+    <div class="table-wrap"><table><thead><tr><th>COMPANY / ROLE</th><th>STATUS</th><th>LOCATION</th><th>DEADLINE</th><th></th></tr></thead><tbody id="applicationsBody"></tbody></table><div class="empty-state" id="emptyState"><div class="empty-graphic">↗</div><h3>Your next chapter starts here.</h3><p>Add an internship or job opportunity to start building your pipeline.</p><button class="button-primary" id="emptyAddButton">＋ Add your first application</button></div></div>
+  </section>
+  <footer><span>Internship Compass</span><span>Your data stays in your local SQLite database.</span></footer>
+</main>
+<div class="modal-backdrop hidden" id="modalBackdrop">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><div><p class="eyebrow">OPPORTUNITY DETAILS</p><h2 id="modalTitle">Add application</h2></div><button class="icon-button" id="closeModal" aria-label="Close">×</button></div>
+    <form id="applicationForm">
+      <input type="hidden" id="applicationId">
+      <div class="form-grid">
+        <label>Company *<input id="company" required maxlength="120" placeholder="e.g. Example Labs"></label>
+        <label>Role *<input id="role" required maxlength="160" placeholder="e.g. Computer Vision Intern"></label>
+        <label>Location<input id="location" maxlength="120" placeholder="Paris, France"></label>
+        <label>Work mode<select id="workMode"><option>Hybrid</option><option>On-site</option><option>Remote</option></select></label>
+        <label>Status<select id="status"><option>Saved</option><option>Applied</option><option>Assessment</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></label>
+        <label>Application deadline<input id="deadline" type="date"></label>
+        <label>Date applied<input id="appliedDate" type="date"></label>
+        <label>Salary / stipend<input id="salary" maxlength="80" placeholder="e.g. €1,200/month"></label>
+        <label>Job posting URL<input id="url" type="url" placeholder="https://…"></label>
+        <label>Contact<input id="contact" maxlength="160" placeholder="Recruiter or contact email"></label>
+        <label class="full-width">Notes<textarea id="notes" rows="3" maxlength="4000" placeholder="Why it interests you, follow-up tasks, interview notes…"></textarea></label>
+      </div>
+      <p class="form-error hidden" id="formError"></p>
+      <div class="modal-actions"><button type="button" class="button-quiet" id="cancelModal">Cancel</button><button type="submit" class="button-primary" id="saveButton">Save application</button></div>
+    </form>
+  </section>
+</div>
+<script src="/static/app.js"></script>
+</body></html>
